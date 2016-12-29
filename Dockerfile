@@ -19,13 +19,9 @@ RUN apt-get update && \
       patch \
       wget && \
 # Install Dradis
-    wget -q \
-      -O /opt/dradisframework-$DRADIS_VERSION.tar.gz \
-      https://github.com/dradis/dradisframework/archive/v$DRADIS_VERSION.tar.gz && \
     cd /opt && \
-    tar xzf dradisframework-$DRADIS_VERSION.tar.gz && \
-    ln -s dradisframework-$DRADIS_VERSION dradis && \
-    cd dradis && \
+    git clone https://github.com/dradis/dradis-ce.git && \
+    cd dradis-ce
     sed -i 's/^# *\(.*execjs\)/\1/' Gemfile && \
     ruby bin/setup && \
     bundle exec rake assets:precompile && \
